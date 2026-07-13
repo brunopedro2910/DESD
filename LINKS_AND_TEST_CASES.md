@@ -6,9 +6,9 @@
 ## Public links
 
 - Git repository: <https://github.com/brunopedro2910/DESD>
-- Project management board: **PROJECT_BOARD_URL_REQUIRED**
+- Project management board: <https://app.notion.com/p/BRFN-Test-Cases-Task-Board-ae1fabe4c27d82c1b631810d263ac7d9?source=copy_link>
 
-I will open both links in a private browser window before submission and confirm that tutors can access them without requesting permission.
+I opened both links for my final submission check and used them as the public evidence for my individual project.
 
 ## Test cases I implemented
 

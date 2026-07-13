@@ -14,9 +14,9 @@ Deadline in the supplied brief: **13 July 2026 at 14:00 UK time**. The brief say
 
 ## Project board
 
-- [ ] I added the final public project-board URL to `LINKS_AND_TEST_CASES.md`.
-- [ ] The board opens without requesting tutor access.
-- [ ] The board records me as the owner of my individual tasks.
+- [x] I added the final public project-board URL to `LINKS_AND_TEST_CASES.md`.
+- [x] The board opens without requesting tutor access.
+- [x] The board records me as the owner of my individual tasks.
 
 ## Demonstration
 
@@ -28,7 +28,7 @@ Deadline in the supplied brief: **13 July 2026 at 14:00 UK time**. The brief say
 
 ## Final ZIP
 
-- [ ] `LINKS_AND_TEST_CASES.md` contains both final public links.
+- [x] `LINKS_AND_TEST_CASES.md` contains both final public links.
 - [x] `BRUNO_PEDRO_CONTRIBUTIONS_MATRIX.docx` contains only my information and records 100% ownership.
 - [x] Source code, Docker files, `.env.example`, README and test evidence are present.
 - [ ] I signed and dated the contribution matrix.
