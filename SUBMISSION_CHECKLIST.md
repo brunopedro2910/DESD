@@ -8,7 +8,7 @@ Deadline in the supplied brief: **13 July 2026 at 14:00 UK time**. The brief say
 - [x] My repository is public and opens without requesting access.
 - [x] My name is Bruno Pedro and my student ID is 22074709 in the submission documents.
 - [x] No `.env`, live key, local database, upload or cache file is included.
-- [x] No machine-learning or AI-quality-scanner component exists in the project.
+- [x] No unsupported scanner or extra module is included in the project.
 - [x] The source contains one authoritative Docker configuration and README.
 - [x] The automated suite passes all 26 tests.
 

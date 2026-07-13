@@ -38,7 +38,7 @@ class Command(BaseCommand):
             profile.save()
             producers[key] = profile
 
-        customer, _ = User.objects.get_or_create(username="gather_customer", defaults={"first_name": "Alex", "role": User.Role.CUSTOMER})
+        customer, _ = User.objects.get_or_create(username="gather_customer", defaults={"first_name": "Local", "role": User.Role.CUSTOMER})
         customer.set_password("GatherDemo!2026")
         customer.save()
         Address.objects.get_or_create(user=customer, label="Home", defaults={"line_1": "24 Demo Street", "city": "Bristol", "postcode": "BS1 4ST", "is_default": True})
