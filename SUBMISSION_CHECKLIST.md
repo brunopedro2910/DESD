@@ -1,36 +1,39 @@
-# My Submission Checklist
+# Bruno Pedro Submission Check
 
-Deadline in the supplied brief: **13 July 2026 at 14:00 UK time**. The brief says there is no 48-hour late window.
+The assessment deadline in the brief is **13 July 2026 at 14:00 UK time**.
 
-## Repository
+## Repository evidence
 
-- [x] I added my final GitHub repository URL to `LINKS_AND_TEST_CASES.md`.
-- [x] My repository is public and opens without requesting access.
-- [x] My name is Bruno Pedro and my student ID is 22074709 in the submission documents.
-- [x] No `.env`, live key, local database, upload or cache file is included.
-- [x] No unsupported scanner or extra module is included in the project.
-- [x] The source contains one authoritative Docker configuration and README.
-- [x] The automated suite passes all 26 tests.
+- [x] My final GitHub link is recorded in `LINKS_AND_TEST_CASES.md`.
+- [x] The repository points to `brunopedro2910/DESD`.
+- [x] The repository is public.
+- [x] My name and student ID are present in the submission files.
+- [x] The project keeps secrets, local databases, uploads and cache files out of Git.
+- [x] The Docker setup is the one I intend to submit.
+- [x] The automated Django test suite has 26 passing tests.
+- [x] The project does not include unsupported extra scanner functionality.
 
-## Project board
+## Project-board evidence
 
-- [x] I added the final public project-board URL to `LINKS_AND_TEST_CASES.md`.
-- [x] The board opens without requesting tutor access.
-- [x] The board records me as the owner of my individual tasks.
+- [x] My Notion board link is recorded in `LINKS_AND_TEST_CASES.md`.
+- [x] The board is the public board I am submitting.
+- [x] The board records the work as my individual project evidence.
 
-## Demonstration
+## Demonstration rehearsal
 
-- [ ] I rehearsed all 25 supplied test-case scenarios.
-- [ ] I prepared customer, producer, restaurant and administrator logins.
-- [ ] I can demonstrate Docker health, API permissions and multi-producer checkout.
-- [ ] I can explain the database model, 48-hour rule, stock locking and 5/95 split.
-- [ ] I can demonstrate login protection, settlement generation and financial export.
+- [ ] I have walked through all 25 supplied assessment scenarios.
+- [ ] I have the customer, producer, restaurant and administrator accounts ready.
+- [ ] I can show Docker startup, API health and role permissions.
+- [ ] I can explain the database model, basket flow and supplier-order split.
+- [ ] I can explain the 48-hour preparation rule, stock locking and 5/95 finance rule.
+- [ ] I can show settlement generation, finance export and login protection.
 
-## Final ZIP
+## Final upload check
 
-- [x] `LINKS_AND_TEST_CASES.md` contains both final public links.
-- [x] `BRUNO_PEDRO_CONTRIBUTIONS_MATRIX.docx` contains only my information and records 100% ownership.
+- [x] `LINKS_AND_TEST_CASES.md` contains the GitHub and Notion links.
+- [x] `BRUNO_PEDRO_SUBMISSION_LINKS.pdf` exists as a PDF copy of my links evidence.
+- [x] `BRUNO_PEDRO_CONTRIBUTIONS_MATRIX.docx` contains only my details and 100% contribution.
 - [x] Source code, Docker files, `.env.example`, README and test evidence are present.
-- [ ] I signed and dated the contribution matrix.
-- [ ] I created one ZIP without `.git`, `.env`, `tmp`, local databases, media or Docker volumes.
-- [ ] I opened the ZIP and checked its contents before upload.
+- [ ] I have signed and dated the contribution matrix.
+- [ ] I have built the final ZIP without `.git`, `.env`, `tmp`, local databases, media or Docker volumes.
+- [ ] I have opened the ZIP and checked the contents before uploading.

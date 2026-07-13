@@ -1,65 +1,75 @@
-# Gather Bristol Marketplace
+# Gather
 
-I built Gather as my individual DESD resit project for the Bristol Regional Food Network case study.
+This is my individual DESD resit implementation for the Bristol Regional Food Network case study.
 
-**Author:** Bruno Pedro  
+**Name:** Bruno Pedro  
 **Student ID:** 22074709  
-**Contribution:** 100%
+**Recorded contribution:** 100%
 
-## What I implemented
+## Project overview
 
-Gather is a Django and Django REST Framework marketplace that connects customers with food producers around Bristol. My implementation includes:
+Gather is a Dockerised Django marketplace for local Bristol food. I built it so the full journey is visible in one system: a customer can discover products, fill a basket, place an order, and each producer then manages only their own part of that order.
 
-- customer, producer, community-group and restaurant accounts;
-- producer profiles, seasonal products, stock, allergens and food-mile information;
-- category browsing, product search and organic filters;
-- persistent baskets containing products from several producers;
-- one customer checkout split into separate supplier orders;
-- a minimum 48-hour preparation rule for every producer;
-- a simulated assessment payment record with no real financial data;
-- an exact 5% network commission and 95% producer allocation;
-- producer-only dispatch views, controlled status transitions, notes and audit events;
-- weekly settlement generation and producer settlement history;
-- recurring restaurant schedules with pause, resume and cancellation controls;
-- surplus offers, verified reviews, recipes, stories and low-stock notifications;
-- staff-only financial filters and CSV exports;
-- login throttling, login audit records and role/ownership permissions;
-- an ownership-scoped REST API.
+The project covers the core case-study areas:
 
-The demonstration catalogue contains 41 products across eight categories and four producers.
+- account registration for customers, producers, restaurants and community buyers;
+- producer profiles with delivery lead times, contact details and food-mile information;
+- product listings with stock, category, season, allergens, organic status and images;
+- browsing, searching and filtering products that are currently available;
+- persistent baskets, stock checks and quantity updates;
+- checkout with simulated payment records and no real card handling;
+- one customer order split into producer-specific supplier orders;
+- 48-hour producer preparation validation;
+- 5% BRFN commission and 95% producer payout calculation;
+- producer dispatch tools, order notes and status history;
+- weekly settlement records for delivered producer orders;
+- restaurant recurring orders and community bulk-order support;
+- surplus discounts, reviews, stories, recipes and notifications;
+- staff-only finance reporting with filters and CSV export;
+- REST API endpoints with role and ownership protection.
 
-## Project structure
+The seed data gives me 41 products, eight product categories and four producers for demonstration.
+
+## How the code is arranged
 
 ```text
 fresh_exchange/
-|-- exchange/        Django configuration
-|-- marketplace/     Models, services, forms, views, API and tests
+|-- exchange/          project settings, URLs and WSGI entrypoint
+|-- marketplace/       app models, services, forms, views, API and tests
 |-- manage.py
-docker/              Container entrypoint
-deployment/          Optional Nginx configuration
+docker/                container startup script
+deployment/            optional Nginx config
 ```
 
-I keep checkout and settlement rules in `fresh_exchange/marketplace/services.py`. Checkout uses one database transaction to lock stock, validate preparation dates, create supplier orders, calculate commission, record the simulated payment and send notifications.
+Most business rules are kept in `fresh_exchange/marketplace/services.py`. I used that file for checkout, stock locking, supplier-order creation, payment recording, commission calculation, settlement generation and notifications because those actions need to stay consistent across the website and tests.
 
-## Run with Docker
+## Start the project
 
 ```bash
 docker compose up --build
 ```
 
-Open [http://localhost:8000/](http://localhost:8000/).
+Then open:
 
-The standard environment starts three containers:
+<http://localhost:8000/>
 
-- `web` - Django and Gunicorn;
-- `db` - PostgreSQL;
-- `redis` - cache and login-throttling storage.
+The Docker setup runs:
 
-The first startup applies migrations, collects static files and loads deterministic demonstration data. A later startup safely checks the same data without duplicating it.
+| Container | Purpose |
+|---|---|
+| `web` | Django app served through Gunicorn |
+| `db` | PostgreSQL database |
+| `redis` | cache and login-throttling support |
 
-## Demonstration accounts
+On startup the app applies migrations, collects static files and loads the demonstration data. The seed command is safe to run again because it updates the demo records instead of creating duplicate catalogues.
 
-All demonstration accounts use the password `GatherDemo!2026`.
+## Demo logins
+
+Every local demo account uses:
+
+```text
+GatherDemo!2026
+```
 
 | Role | Username |
 |---|---|
@@ -68,45 +78,51 @@ All demonstration accounts use the password `GatherDemo!2026`.
 | Restaurant | `gather_restaurant` |
 | Administrator | `gather_admin` |
 
-These accounts and payment records are for local assessment testing only.
+These accounts are only for assessment testing. The payment service is also simulated, so the project never asks for real payment details.
 
-## Run tests
+## Test command
 
 ```powershell
 docker compose run --rm --no-deps -e USE_SQLITE=true -e DJANGO_DEBUG=true --entrypoint python -w /app/fresh_exchange web manage.py test marketplace
 ```
 
-My automated suite contains 26 tests covering browsing, search, stock protection, basket updates, multi-producer checkout, lead times, commission calculations, simulated payments, settlement generation, recurring orders, login auditing, API permissions, ownership boundaries, financial CSV exports and password hashing.
+My automated checks currently cover 26 test cases across registration, permissions, search, baskets, checkout, stock deduction, supplier-order splitting, settlements, recurring orders, login auditing, API access, financial exports and password hashing.
 
-## Weekly settlements
+## Useful pages
 
-Generate or refresh the current seven-day settlement records from delivered supplier orders:
+| Feature area | Path |
+|---|---|
+| Market catalogue | `/market/` |
+| Basket | `/basket/` |
+| My account | `/account/` |
+| Producer studio | `/producer/` |
+| Producer orders | `/producer/orders/` |
+| Restaurant schedules | `/recurring/` |
+| Surplus food | `/surplus/` |
+| Stories and recipes | `/stories/` |
+| Finance report | `/network/financial-report/` |
+| API health check | `/api/health/` |
+| Product API | `/api/products/` |
+
+## Settlement command
+
+To create or refresh weekly settlement rows from delivered supplier orders:
 
 ```powershell
 docker compose exec -w /app/fresh_exchange web python manage.py generate_settlements
 ```
 
-## Main URLs
+## Submission files
 
-| Area | URL |
+I included the evidence files I need for the final submission:
+
+| File | What it is for |
 |---|---|
-| Marketplace | `/market/` |
-| Basket | `/basket/` |
-| Customer account | `/account/` |
-| Producer operations | `/producer/` |
-| Producer dispatch board | `/producer/orders/` |
-| Restaurant schedules | `/recurring/` |
-| Surplus offers | `/surplus/` |
-| Stories and recipes | `/stories/` |
-| Staff financial report | `/network/financial-report/` |
-| API health | `/api/health/` |
-| API products | `/api/products/` |
+| `BRUNO_PEDRO_CONTRIBUTIONS_MATRIX.docx` | my individual contribution matrix |
+| `BRUNO_PEDRO_SUBMISSION_LINKS.docx` | Word copy of my repository, board and test-case links |
+| `BRUNO_PEDRO_SUBMISSION_LINKS.pdf` | PDF copy of the same submission-link evidence |
+| `LINKS_AND_TEST_CASES.md` | Markdown evidence for public links and case coverage |
+| `docs/TEST_CASE_COVERAGE.md` | detailed implementation map for the 25 supplied scenarios |
+| `SUBMISSION_CHECKLIST.md` | my final submission checks |
 
-## Submission evidence
-
-- `BRUNO_PEDRO_CONTRIBUTIONS_MATRIX.docx` - my official individual contribution matrix;
-- `LINKS_AND_TEST_CASES.md` - repository, project-board and test-case summary;
-- `docs/TEST_CASE_COVERAGE.md` - detailed mapping to the 25 supplied cases;
-- `SUBMISSION_CHECKLIST.md` - my final manual checks.
-
-I used a local simulated payment gateway because the case study explicitly permits a mock service and prohibits real financial data.
+I built this version as my own individual submission and all project evidence is recorded under my name.

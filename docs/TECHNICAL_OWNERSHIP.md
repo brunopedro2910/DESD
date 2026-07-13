@@ -1,26 +1,37 @@
-# My Technical Ownership
+# Technical Ownership Record
 
-I completed this individual DESD resit submission and record myself as the 100% owner of the implementation and evidence in this repository.
+I am submitting this project as my own individual DESD resit work.
 
-## What I completed
+**Name:** Bruno Pedro  
+**Student ID:** 22074709  
+**Contribution recorded:** 100%
 
-1. Requirements analysis and project planning
-2. Database schema and migrations
-3. Django models and business rules
-4. Views, forms and URL routing
-5. Templates, responsive layout and interaction design
-6. Registration, authentication, login throttling and session handling
-7. Role-based authorisation and ownership restrictions
-8. Product, inventory, basket and order workflows
-9. Multi-producer checkout and supplier-order allocation
-10. Simulated payment records and 5/95 commission calculations
-11. Weekly settlement generation and financial reporting
-12. Recurring restaurant schedules and community bulk orders
-13. Surplus, notifications, reviews, stories and recipes
-14. REST API development and scoped permissions
-15. PostgreSQL and Redis integration
-16. Docker and optional Nginx configuration
-17. Automated testing, debugging and performance-aware queries
-18. README, test-case evidence and submission preparation
+## Areas I completed
 
-My signed record is `BRUNO_PEDRO_CONTRIBUTIONS_MATRIX.docx`. It uses the supplied contribution-matrix template and contains only my name and student ID.
+I was responsible for the full project package:
+
+- requirements interpretation and planning evidence;
+- database models, relationships and migrations;
+- Django forms, views, URLs and templates;
+- service-layer rules for checkout, stock and settlements;
+- registration, login, throttling and session handling;
+- role-based authorisation and ownership checks;
+- product, basket, order, supplier-order and dispatch workflows;
+- simulated payment records and finance calculations;
+- restaurant recurring orders and community bulk orders;
+- surplus offers, reviews, stories, recipes and notifications;
+- staff finance reporting and CSV exports;
+- REST API endpoints and scoped permissions;
+- PostgreSQL, Redis, Docker and optional Nginx configuration;
+- automated tests and manual demonstration evidence;
+- README, links document, coverage notes and contribution matrix.
+
+## Contribution evidence
+
+My contribution matrix is saved as:
+
+```text
+BRUNO_PEDRO_CONTRIBUTIONS_MATRIX.docx
+```
+
+The matrix contains only my name, my student ID and my 100% contribution record.

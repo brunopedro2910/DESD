@@ -1,39 +1,41 @@
-# Supplied Test-Case Coverage
+# Test-Case Coverage Map
 
-I mapped each supplied assessment scenario to the current Gather implementation. The paths and class names below are the evidence I will use during my demonstration.
+I use this file as my technical map from the supplied assessment scenarios to the implemented Gather features.
 
-| ID | Implementation evidence | Automated coverage |
+## Scenario mapping
+
+| Case | Where I implemented it | How I verify it |
 |---|---|---|
-| TC-001 | `RegistrationForm`, `Producer`, `/register/` | Password/role boundaries covered |
-| TC-002 | `RegistrationForm`, `Address`, `/register/` | New-customer and password behaviour covered |
-| TC-003 | `ProductForm`, `/producer/products/new/`, producer API permission | Producer API creation and customer denial covered |
-| TC-004 | `ProductList`, categories, available/stock filtering | Public market and filters covered |
-| TC-005 | Name, description and producer search | Search and empty-result behaviour covered |
-| TC-006 | `Cart`, `CartItem`, add/update/remove views | Quantity and stock validation covered |
-| TC-007 | `checkout_cart`, `PaymentTransaction`, `SupplierOrder` | Checkout, stock and payment records covered |
-| TC-008 | Producer grouping and one supplier order per producer | Multi-producer split covered |
-| TC-009 | `/producer/orders/` with producer-scoped query | Cross-producer denial covered |
-| TC-010 | Controlled transitions and `SupplierOrderEvent` notes | Progression, ownership and audit event covered |
-| TC-011 | Product stock, availability and low-stock threshold | Deduction and invalid stock covered |
-| TC-012 | `generate_weekly_settlements`, `Settlement`, producer history | Delivered-order settlement totals covered |
-| TC-013 | `Producer.food_miles` Haversine property | Demonstrated on product detail page |
-| TC-014 | `Product.organic` and `?organic=true` | Organic filter covered |
-| TC-015 | `Allergen`, notes and product-page display | Demonstrated with product form/detail |
-| TC-016 | `Product.in_season` and month range fields | Demonstrated with product records |
-| TC-017 | Community role and `Order.is_bulk` | Checkout service behaviour covered |
-| TC-018 | `RecurringOrder`, `/recurring/`, pause/resume/cancel action | Ownership and pause action covered |
-| TC-019 | `SurplusDeal` validation and active price | Discounted price covered |
-| TC-020 | `Story`, `Recipe`, recipe-product relationship and journal | Demonstrated through producer content forms |
-| TC-021 | `/account/orders/`, reorder and CSV receipt | Reorder uses the same stock-safe cart service |
-| TC-022 | Django validators/hashing, `SecureLoginView`, `LoginAudit`, CSRF, role checks | Hashing, login audit and permission boundaries covered |
-| TC-023 | Checkout threshold calculation and `Notification` | Low-stock notification covered |
-| TC-024 | Completed-order review check and unique review constraint | Demonstrated using delivered order data |
-| TC-025 | Staff-only financial report, filters and CSV export | Staff denial, calculations and CSV export covered |
+| TC-001 | `RegistrationForm`, `Producer`, `/register/` | Producer role and password boundaries are tested. |
+| TC-002 | `RegistrationForm`, `Address`, `/register/` | Customer creation and password behaviour are tested. |
+| TC-003 | `ProductForm`, `/producer/products/new/`, producer API create endpoint | Producer creation is tested; customer product creation is blocked. |
+| TC-004 | Product list view, categories, availability and stock filters | Public catalogue and filtering are tested. |
+| TC-005 | Product search across name, description and producer | Search and empty-result behaviour are tested. |
+| TC-006 | `Cart`, `CartItem`, add/update/remove basket views | Quantity handling and stock validation are tested. |
+| TC-007 | `checkout_cart`, `PaymentTransaction`, `SupplierOrder` | Checkout, payment record, stock and lead-time rules are tested. |
+| TC-008 | Producer grouping inside checkout service | Multi-producer order splitting is tested. |
+| TC-009 | `/producer/orders/` producer-scoped query | Cross-producer access is tested. |
+| TC-010 | `SupplierOrderEvent` and controlled status actions | Status progression, notes and audit ownership are tested. |
+| TC-011 | Product stock, availability and low-stock threshold fields | Stock deduction and invalid stock cases are tested. |
+| TC-012 | `generate_weekly_settlements` and `Settlement` | Settlement totals for delivered orders are tested. |
+| TC-013 | `Producer.food_miles` property | Demonstrated on product detail pages. |
+| TC-014 | `Product.organic` and `?organic=true` | Organic filtering is tested. |
+| TC-015 | `Allergen`, allergen notes and product detail output | Demonstrated through product records and forms. |
+| TC-016 | `Product.in_season`, `season_start`, `season_end` | Demonstrated with normal and wrap-around season records. |
+| TC-017 | Community role and `Order.is_bulk` | Bulk checkout behaviour is tested. |
+| TC-018 | `RecurringOrder`, `/recurring/`, pause/resume/cancel action | Ownership and pause behaviour are tested. |
+| TC-019 | `SurplusDeal`, validation and discounted active price | Discounted pricing is tested. |
+| TC-020 | `Story`, `Recipe` and product relationships | Demonstrated through producer content forms and journal pages. |
+| TC-021 | `/account/orders/`, reorder action and receipt CSV | Reorder uses the same stock-safe cart logic. |
+| TC-022 | Django auth, `SecureLoginView`, `LoginAudit`, CSRF and role checks | Hashing, audit logging and permission boundaries are tested. |
+| TC-023 | Low-stock calculation and `Notification` | Producer notification creation is tested. |
+| TC-024 | Review ownership, completed-order check and unique constraint | Demonstrated with delivered order data. |
+| TC-025 | Staff finance report, date/producer filters and CSV export | Staff denial, totals and CSV export are tested. |
 
-## Automated verification
+## Automated command
 
 ```powershell
 docker compose run --rm --no-deps -e USE_SQLITE=true -e DJANGO_DEBUG=true --entrypoint python -w /app/fresh_exchange web manage.py test marketplace
 ```
 
-The suite contains **26 tests**. I use the supplied 25 scenarios for manual presentation coverage because several scenarios contain multiple user-interface steps that are clearer to demonstrate than to claim as a single automated test.
+The suite has **26 passing tests**. I still use the supplied 25 cases for the live presentation because several of them are easier to show as end-to-end user journeys than as one isolated unit test.
