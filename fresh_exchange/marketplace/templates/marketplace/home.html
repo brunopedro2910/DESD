@@ -1,0 +1,10 @@
+{% extends 'marketplace/base.html' %}
+{% block content %}
+<section class="home-hero">
+  <div class="hero-copy"><p class="eyebrow">The Bristol food edit</p><h1>Gather what<br>grows <em>nearby.</em></h1><p>One considered market for seasonal produce, independent makers and neighbourhood kitchens.</p><div class="button-row"><a class="button lime" href="{% url 'products' %}">Enter the market <i class="bi bi-arrow-right"></i></a><a class="button ghost" href="{% url 'register' %}">Become a producer</a></div></div>
+  <div class="hero-poster"><div class="poster-number">01</div><div class="poster-photo"></div><div class="poster-note"><b>This week's table</b><span>Harvested, baked and bottled around Bristol.</span></div></div>
+</section>
+<section class="manifesto"><p>Not a supermarket.</p><h2>A shared digital market built around the people who grow and make our food.</h2></section>
+<section class="home-products section-wrap"><div class="section-title"><div><p class="eyebrow">Freshly listed</p><h2>On the table now</h2></div><a href="{% url 'products' %}">Browse all <i class="bi bi-arrow-right"></i></a></div><div class="product-row">{% for product in products %}{% include 'marketplace/product_card.html' %}{% empty %}<p>Fresh listings will appear here.</p>{% endfor %}</div></section>
+<section class="three-notes"><article><span>01</span><h3>One basket</h3><p>Buy from several producers without managing separate checkouts.</p></article><article><span>02</span><h3>Clear provenance</h3><p>See the producer, season, allergens and food journey before ordering.</p></article><article><span>03</span><h3>Useful surplus</h3><p>Time-limited discounts move good food before it becomes waste.</p></article></section>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends 'marketplace/base.html' %}
+{% block title %}Sign in | Gather{% endblock %}
+{% block content %}
+<section class="auth-page">
+  <div class="auth-message"><p class="eyebrow">Welcome back</p><h1>Return to<br>your local<br><em>table.</em></h1><p>Orders, addresses and independent producers in one place.</p></div>
+  <div class="auth-form"><h2>Sign in</h2><p>Use your Gather account details.</p><form method="post">{% csrf_token %}{{ form.as_div }}<label class="remember-control"><input type="checkbox" name="remember_me" value="yes"> Keep me signed in</label>{% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}<button class="button dark">Continue</button></form><a href="{% url 'register' %}">New here? Create an account.</a></div>
+</section>
+{% endblock %}

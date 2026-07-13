@@ -1,0 +1,13 @@
+{% extends 'marketplace/base.html' %}
+{% block title %}Checkout | Gather{% endblock %}
+{% block content %}
+<header class="page-lead"><p class="eyebrow">One payment, clear responsibilities</p><h1>Confirm the route.</h1><p>Every producer keeps their own preparation date while I pay once through the assessment test gateway.</p></header>
+<form method="post" class="checkout-layout">{% csrf_token %}
+  <div>
+    <section class="checkout-panel"><span>01</span><h2>Delivery address</h2>{% for address in addresses %}<label class="address-choice"><input type="radio" name="address" value="{{ address.pk }}" {% if address.is_default %}checked{% endif %}><span><b>{{ address.label }}</b>{{ address.line_1 }}, {{ address.city }}, {{ address.postcode }}</span></label>{% empty %}<p>Add an address before continuing.</p><a href="{% url 'addresses' %}">Create an address</a>{% endfor %}</section>
+    <section class="checkout-panel"><span>02</span><h2>Producer delivery dates</h2><div class="supplier-dates">{% for producer in producers %}<label><b>{{ producer.name }}</b><small>Minimum {{ producer.lead_time_hours }} hours preparation</small><input type="date" name="delivery_{{ producer.pk }}" required></label>{% endfor %}</div></section>
+    <section class="checkout-panel"><span>03</span><h2>Useful notes</h2><textarea name="instructions" rows="4" placeholder="Access, collection or preparation information"></textarea></section>
+  </div>
+  <aside class="checkout-summary"><p class="eyebrow">Test payment summary</p>{% regroup items by product.producer as supplier_groups %}{% for group in supplier_groups %}<h3>{{ group.grouper.name }}</h3>{% for item in group.list %}<div><span>{{ item.quantity }} × {{ item.product.name }}</span><strong>£{{ item.subtotal }}</strong></div>{% endfor %}{% endfor %}<div class="checkout-total"><span>Total</span><strong>£{{ user.cart.total }}</strong></div><button class="button lime" {% if not addresses %}disabled{% endif %}>Authorise test payment</button><small>No real card or financial data is collected.</small></aside>
+</form>
+{% endblock %}

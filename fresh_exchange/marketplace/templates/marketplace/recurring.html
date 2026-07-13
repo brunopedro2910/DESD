@@ -1,0 +1,13 @@
+{% extends 'marketplace/base.html' %}
+{% block title %}Recurring orders | Gather{% endblock %}
+{% block content %}
+<header class="page-lead"><p class="eyebrow">Restaurant account</p><h1>Recurring orders</h1><p>Keep regular kitchen supplies moving without rebuilding the same order.</p></header>
+<section class="address-layout">
+  <div class="data-list">
+    {% for item in items %}
+    <article><span><b>{{ item.quantity }} &times; {{ item.product.name }}</b><small>Weekday {{ item.weekday }} / next {{ item.next_run }}</small></span><strong>{{ item.active|yesno:"Active,Paused" }}</strong><form method="post" action="{% url 'recurring_action' item.pk %}">{% csrf_token %}<button name="action" value="toggle">{% if item.active %}Pause{% else %}Resume{% endif %}</button><button name="action" value="delete">Cancel</button></form></article>
+    {% empty %}<p>No recurring orders.</p>{% endfor %}
+  </div>
+  <form method="post" class="paper-form">{% csrf_token %}<h2>Schedule an item</h2>{{ form.as_div }}<button class="button dark">Save schedule</button></form>
+</section>
+{% endblock %}

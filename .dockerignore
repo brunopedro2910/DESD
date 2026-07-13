@@ -1,0 +1,17 @@
+.git
+.env
+.venv
+venv
+__pycache__
+*.py[cod]
+*.sqlite3
+*.log
+*.pdf
+*.docx
+.pytest_cache
+.coverage
+htmlcov
+static_collected
+media
+output
+tmp

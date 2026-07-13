@@ -1,0 +1,29 @@
+<article class="produce-card">
+  <a class="produce-visual category-{{ product.category.slug }}" href="{% url 'product' product.slug %}" aria-label="View {{ product.name }}">
+    {% if product.image %}<img src="{{ product.image.url }}" alt="{{ product.name }}">
+    {% else %}
+      {% if product.category.slug == 'vegetables' %}<i class="bi bi-flower1"></i>
+      {% elif product.category.slug == 'fruit' %}<i class="bi bi-apple"></i>
+      {% elif product.category.slug == 'bakery' %}<i class="bi bi-basket2"></i>
+      {% elif product.category.slug == 'dairy' %}<i class="bi bi-droplet-fill"></i>
+      {% elif product.category.slug == 'eggs' %}<i class="bi bi-egg-fill"></i>
+      {% elif product.category.slug == 'drinks' %}<i class="bi bi-cup-straw"></i>
+      {% elif product.category.slug == 'seasonal' %}<i class="bi bi-sun-fill"></i>
+      {% else %}<i class="bi bi-archive-fill"></i>{% endif %}
+    {% endif %}
+    <span>{{ product.category.name }}</span>
+  </a>
+  <div class="produce-copy">
+    <div class="produce-source"><span>{{ product.producer.name }}</span><b>{{ product.producer.postcode|slice:':4' }}</b></div>
+    <h2><a href="{% url 'product' product.slug %}">{{ product.name }}</a></h2>
+    <p>{{ product.description|truncatewords:11 }}</p>
+    <div class="produce-flags">
+      {% if product.organic %}<span><i class="bi bi-leaf-fill"></i> Organic</span>{% endif %}
+      {% if product.in_season %}<span><i class="bi bi-check-circle-fill"></i> In season</span>{% endif %}
+    </div>
+    <div class="produce-price">
+      <p><strong>&pound;{{ product.active_price }}</strong><span>/ {{ product.unit }}</span></p>
+      <a href="{% url 'product' product.slug %}" aria-label="Open {{ product.name }}"><i class="bi bi-arrow-up-right"></i></a>
+    </div>
+  </div>
+</article>

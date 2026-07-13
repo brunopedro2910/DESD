@@ -1,0 +1,18 @@
+{% extends 'marketplace/base.html' %}
+{% block title %}{{ product.name }} | Gather{% endblock %}
+{% block content %}
+<section class="product-view">
+  <div class="product-visual">{% if product.image %}<img src="{{ product.image.url }}" alt="{{ product.name }}">{% else %}<span>{{ product.name|first }}</span>{% endif %}<small>{{ product.category.name }}</small></div>
+  <div class="product-sheet">
+    <p class="eyebrow">{{ product.producer.name }} / {{ product.producer.postcode }}</p><h1>{{ product.name }}</h1><p class="product-description">{{ product.description }}</p><div class="big-price">&pound;{{ product.active_price }} <small>/ {{ product.unit }}</small></div>
+    <dl><div><dt>Available stock</dt><dd>{{ product.stock }}</dd></div><div><dt>Season</dt><dd>{% if product.in_season %}In season now{% else %}Outside main season{% endif %}</dd></div>{% if product.harvest_date %}<div><dt>Harvested</dt><dd>{{ product.harvest_date }}</dd></div>{% endif %}{% if product.best_before_date %}<div><dt>Best before</dt><dd>{{ product.best_before_date }}</dd></div>{% endif %}<div><dt>Food miles to Bristol</dt><dd>{% if product.producer.food_miles != None %}{{ product.producer.food_miles }} miles{% else %}Awaiting location{% endif %}</dd></div><div><dt>Organic</dt><dd>{{ product.organic|yesno:"Yes,No" }}</dd></div><div><dt>Allergens</dt><dd>{% for allergen in product.allergens.all %}{{ allergen.name }}{% if not forloop.last %}, {% endif %}{% empty %}None listed{% endfor %}{% if product.allergen_notes %} - {{ product.allergen_notes }}{% endif %}</dd></div></dl>
+    {% if user.is_authenticated and product.purchasable %}<form class="buy-form" action="{% url 'add_to_cart' product.pk %}" method="post">{% csrf_token %}<input type="number" name="quantity" min="1" max="{{ product.stock }}" value="1"><input type="hidden" name="next" value="{% url 'product' product.slug %}"><button class="button dark">Add to basket <i class="bi bi-plus"></i></button></form>{% elif not user.is_authenticated %}<a class="button dark" href="{% url 'login' %}?next={{ request.path }}">Sign in to buy</a>{% else %}<p class="sold-out">Currently unavailable</p>{% endif %}
+  </div>
+</section>
+{% if related_recipes %}<section class="section-wrap"><div class="section-title"><div><p class="eyebrow">From the producer</p><h2>Ideas for this product</h2></div></div><div class="review-grid">{% for recipe in related_recipes %}<article><strong>{{ recipe.title }}</strong><p>{{ recipe.method|truncatewords:24 }}</p><a href="{% url 'stories' %}">Read the recipe</a></article>{% endfor %}</div></section>{% endif %}
+<section class="review-block section-wrap">
+  <div class="section-title"><div><p class="eyebrow">Customer notes</p><h2>Reviews{% if rating_average %} / {{ rating_average }} out of 5{% endif %}</h2></div></div>
+  <div class="review-grid">{% for review in reviews %}<article><strong>{{ review.rating }}/5</strong><p>{{ review.comment }}</p><small>{{ review.customer.username }} / verified purchase</small>{% if review.producer_response %}<blockquote>{{ review.producer_response }}</blockquote>{% endif %}</article>{% empty %}<p>No reviews yet.</p>{% endfor %}</div>
+  {% if user.is_authenticated %}<form class="inline-form" action="{% url 'add_review' product.pk %}" method="post">{% csrf_token %}{{ review_form.as_div }}<button class="button dark">Submit review</button></form>{% endif %}
+</section>
+{% endblock %}

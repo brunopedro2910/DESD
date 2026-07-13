@@ -1,0 +1,15 @@
+{% extends 'marketplace/base.html' %}
+{% block title %}Network finance | Gather{% endblock %}
+{% block content %}
+<header class="page-lead"><p class="eyebrow">Authorised network reporting</p><h1>Financial audit.</h1><p>Every 5% commission record remains linked to its source order and producer allocation.</p></header>
+<section class="finance-report">
+  <form method="get" class="report-filters">
+    <label>From<input type="date" name="date_from" value="{{ date_from }}"></label>
+    <label>To<input type="date" name="date_to" value="{{ date_to }}"></label>
+    <label>Producer<select name="producer"><option value="">All producers</option>{% for producer in producers %}<option value="{{ producer.pk }}" {% if selected_producer == producer.pk|stringformat:'s' %}selected{% endif %}>{{ producer.name }}</option>{% endfor %}</select></label>
+    <button class="button dark">Apply filters</button><button class="button" name="format" value="csv"><i class="bi bi-download"></i> CSV</button>
+  </form>
+  <div class="finance-totals"><article><small>Gross orders</small><strong>&pound;{{ totals.gross|default:"0.00" }}</strong></article><article><small>Network commission</small><strong>&pound;{{ totals.commission|default:"0.00" }}</strong></article><article><small>Producer payouts</small><strong>&pound;{{ totals.payouts|default:"0.00" }}</strong></article></div>
+  <table><thead><tr><th>Order</th><th>Producer</th><th>Delivery</th><th>Gross</th><th>5%</th><th>95%</th></tr></thead><tbody>{% for supplier_order in supplier_orders %}<tr><td>#{{ supplier_order.order_id }}</td><td>{{ supplier_order.producer.name }}</td><td>{{ supplier_order.delivery_date }}</td><td>&pound;{{ supplier_order.gross }}</td><td>&pound;{{ supplier_order.commission }}</td><td>&pound;{{ supplier_order.producer_payout }}</td></tr>{% empty %}<tr><td colspan="6">No financial records matched these filters.</td></tr>{% endfor %}</tbody></table>
+</section>
+{% endblock %}

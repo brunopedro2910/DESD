@@ -1,0 +1,15 @@
+{% extends 'marketplace/base.html' %}
+{% block title %}Dispatch board | Gather{% endblock %}
+{% block content %}
+<header class="page-lead"><p class="eyebrow">Producer-only order view</p><h1>Dispatch board.</h1><p>I only see the products and customer details attached to my part of each marketplace order.</p></header>
+<section class="dispatch-board">
+  {% for supplier_order in supplier_orders %}
+  <article>
+    <header><div><small>ORDER</small><strong>#{{ supplier_order.order_id }}</strong></div><div><small>DELIVER BY</small><strong>{{ supplier_order.delivery_date }}</strong></div><span>{{ supplier_order.get_status_display }}</span></header>
+    <div class="dispatch-customer"><b>{{ supplier_order.order.customer.get_full_name|default:supplier_order.order.customer.username }}</b><span>{{ supplier_order.order.address.line_1 }}, {{ supplier_order.order.address.postcode }}</span><span>{{ supplier_order.order.customer.email }}</span></div>
+    <div class="dispatch-lines">{% for line in supplier_order.lines.all %}<p><span>{{ line.quantity }} &times; {{ line.product_name }}</span><strong>&pound;{{ line.subtotal }}</strong></p>{% endfor %}</div>
+    <footer><dl><div><dt>Gross</dt><dd>&pound;{{ supplier_order.gross }}</dd></div><div><dt>Network 5%</dt><dd>&pound;{{ supplier_order.commission }}</dd></div><div><dt>My payout</dt><dd>&pound;{{ supplier_order.producer_payout }}</dd></div></dl><form method="post" action="{% url 'update_supplier_order' supplier_order.pk %}">{% csrf_token %}<select name="status">{% for value,label in supplier_order.Status.choices %}<option value="{{ value }}" {% if supplier_order.status == value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select><input name="note" maxlength="240" placeholder="Optional update note"><button class="button dark">Save status</button></form></footer>
+  </article>
+  {% empty %}<div class="empty"><h2>No orders need attention.</h2><p>New customer orders will appear here.</p></div>{% endfor %}
+</section>
+{% endblock %}

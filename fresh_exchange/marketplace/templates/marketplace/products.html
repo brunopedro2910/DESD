@@ -1,0 +1,73 @@
+{% extends 'marketplace/base.html' %}
+{% block title %}Market | Gather{% endblock %}
+{% block content %}
+<header class="market-intro">
+  <div>
+    <p class="market-kicker"><i class="bi bi-geo-alt-fill"></i> Bristol and nearby</p>
+    <h1>Good food,<br>closer to home.</h1>
+  </div>
+  <div class="market-intro-note">
+    <strong>{{ paginator.count }}</strong>
+    <span>fresh listings from independent producers</span>
+  </div>
+</header>
+
+<section class="market-workspace">
+  <aside class="market-navigator">
+    <div class="navigator-title">
+      <span>Browse</span>
+      <i class="bi bi-compass"></i>
+    </div>
+    <nav aria-label="Product categories">
+      <a class="navigator-link {% if not active_category and not organic_only %}is-active{% endif %}" href="{% url 'products' %}">
+        <i class="bi bi-grid-1x2-fill"></i><span>All produce</span>
+      </a>
+      {% for category in categories %}
+      <a class="navigator-link {% if active_category == category.slug %}is-active{% endif %}" href="?category={{ category.slug }}">
+        {% if category.slug == 'vegetables' %}<i class="bi bi-flower1"></i>
+        {% elif category.slug == 'fruit' %}<i class="bi bi-apple"></i>
+        {% elif category.slug == 'bakery' %}<i class="bi bi-basket2"></i>
+        {% elif category.slug == 'dairy' %}<i class="bi bi-droplet-fill"></i>
+        {% elif category.slug == 'eggs' %}<i class="bi bi-egg-fill"></i>
+        {% elif category.slug == 'drinks' %}<i class="bi bi-cup-straw"></i>
+        {% elif category.slug == 'seasonal' %}<i class="bi bi-sun-fill"></i>
+        {% else %}<i class="bi bi-archive-fill"></i>{% endif %}
+        <span>{{ category.name }}</span>
+      </a>
+      {% endfor %}
+    </nav>
+    <a class="organic-switch {% if organic_only %}is-active{% endif %}" href="?organic=true">
+      <span><i class="bi bi-leaf-fill"></i> Organic only</span>
+      <i class="bi bi-arrow-up-right"></i>
+    </a>
+  </aside>
+
+  <div class="market-results">
+    <form class="market-search-v2">
+      {% if active_category %}<input type="hidden" name="category" value="{{ active_category }}">{% endif %}
+      {% if organic_only %}<input type="hidden" name="organic" value="true">{% endif %}
+      <i class="bi bi-search"></i>
+      <input name="q" value="{{ query }}" placeholder="What are you looking for?" aria-label="Search products">
+      <button aria-label="Submit search"><i class="bi bi-arrow-right"></i></button>
+    </form>
+
+    <div class="results-heading">
+      <p><b>{{ paginator.count }}</b> listing{{ paginator.count|pluralize }}</p>
+      {% if query or active_category or organic_only %}<a href="{% url 'products' %}">Clear filters <i class="bi bi-x-circle"></i></a>{% endif %}
+    </div>
+
+    <div class="produce-board">
+      {% for product in products %}{% include 'marketplace/product_card.html' %}
+      {% empty %}<div class="market-empty"><i class="bi bi-search"></i><h2>No produce found</h2><p>Try another word or return to the full market.</p><a href="{% url 'products' %}">View all produce</a></div>{% endfor %}
+    </div>
+
+    {% if is_paginated %}
+    <nav class="market-pagination" aria-label="Product pages">
+      {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}{% if active_category %}&category={{ active_category }}{% endif %}"><i class="bi bi-arrow-left"></i> Previous</a>{% else %}<span></span>{% endif %}
+      <b>{{ page_obj.number }} <small>of</small> {{ paginator.num_pages }}</b>
+      {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}{% if active_category %}&category={{ active_category }}{% endif %}">Next <i class="bi bi-arrow-right"></i></a>{% else %}<span></span>{% endif %}
+    </nav>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

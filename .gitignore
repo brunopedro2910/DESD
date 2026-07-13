@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Local environments and secrets
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+env/
+
+# Django runtime data
+*.sqlite3
+*.sqlite3-journal
+media/
+static_collected/
+fresh_exchange/staticfiles/
+*.log
+
+# Local tools and generated previews
+tmp/
+output/
+.vscode/
+.idea/
+
+# Operating-system files
+.DS_Store
+Thumbs.db
