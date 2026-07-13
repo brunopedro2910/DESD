@@ -4,8 +4,8 @@ Deadline in the supplied brief: **13 July 2026 at 14:00 UK time**. The brief say
 
 ## Repository
 
-- [ ] I added my final GitHub repository URL to `LINKS_AND_TEST_CASES.md`.
-- [ ] My repository is public and opens in a private browser window.
+- [x] I added my final GitHub repository URL to `LINKS_AND_TEST_CASES.md`.
+- [x] My repository is public and opens without requesting access.
 - [x] My name is Bruno Pedro and my student ID is 22074709 in the submission documents.
 - [x] No `.env`, live key, local database, upload or cache file is included.
 - [x] No machine-learning or AI-quality-scanner component exists in the project.
