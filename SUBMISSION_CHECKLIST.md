@@ -32,7 +32,7 @@ The assessment deadline in the brief is **13 July 2026 at 14:00 UK time**.
 
 - [x] `LINKS_AND_TEST_CASES.md` contains the GitHub and Notion links.
 - [x] `BRUNO_PEDRO_SUBMISSION_LINKS.pdf` exists as a PDF copy of my links evidence.
-- [x] `BRUNO_PEDRO_CONTRIBUTIONS_MATRIX.docx` contains only my details and 100% contribution.
+- [x] `BRUNO_PEDRO_CONTRIBUTIONS_MATRIX.pdf` contains only my details and 100% contribution.
 - [x] Source code, Docker files, `.env.example`, README and test evidence are present.
 - [ ] I have signed and dated the contribution matrix.
 - [ ] I have built the final ZIP without `.git`, `.env`, `tmp`, local databases, media or Docker volumes.

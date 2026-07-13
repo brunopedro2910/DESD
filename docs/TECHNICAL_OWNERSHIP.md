@@ -31,7 +31,7 @@ I was responsible for the full project package:
 My contribution matrix is saved as:
 
 ```text
-BRUNO_PEDRO_CONTRIBUTIONS_MATRIX.docx
+BRUNO_PEDRO_CONTRIBUTIONS_MATRIX.pdf
 ```
 
 The matrix contains only my name, my student ID and my 100% contribution record.

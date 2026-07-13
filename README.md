@@ -118,9 +118,8 @@ I included the evidence files I need for the final submission:
 
 | File | What it is for |
 |---|---|
-| `BRUNO_PEDRO_CONTRIBUTIONS_MATRIX.docx` | my individual contribution matrix |
-| `BRUNO_PEDRO_SUBMISSION_LINKS.docx` | Word copy of my repository, board and test-case links |
-| `BRUNO_PEDRO_SUBMISSION_LINKS.pdf` | PDF copy of the same submission-link evidence |
+| `BRUNO_PEDRO_CONTRIBUTIONS_MATRIX.pdf` | my individual contribution matrix |
+| `BRUNO_PEDRO_SUBMISSION_LINKS.pdf` | PDF copy of my repository, board and test-case links |
 | `LINKS_AND_TEST_CASES.md` | Markdown evidence for public links and case coverage |
 | `docs/TEST_CASE_COVERAGE.md` | detailed implementation map for the 25 supplied scenarios |
 | `SUBMISSION_CHECKLIST.md` | my final submission checks |
